@@ -4,8 +4,8 @@ import { getNote } from '@/lib/redis';
 export default async function Page({ params }) {
   const noteId = params.id;
   const note = await getNote(noteId);
-  const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
-  await sleep(2000);
+  // const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
+  // await sleep(2000);
 
   if (note == null) {
     return (

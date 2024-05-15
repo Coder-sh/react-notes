@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import NotePreveiw from './NotePreview';
 import { useFormStatus } from 'react-dom';
+import { saveNote, deleteNote } from '../app/actions';
 
 export default function NoteEditor({ noteId, initialTitle, initialBody }) {
   const { pending } = useFormStatus();
+  console.log(pending);
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
   const isDraft = !noteId;
@@ -33,7 +35,11 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }) {
       </form>
       <div className="note-editor-preview">
         <form className="note-editor-menu" role="menubar">
-          <button className="note-editor-done" disabled={pending}>
+          <button
+            className="note-editor-done"
+            disabled={pending}
+            formAction={() => saveNote(noteId, title, body)}
+          >
             <img
               src="/checkmark.svg"
               width="14px"
@@ -48,6 +54,7 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }) {
               className="note-editor-delete"
               disabled={pending}
               role="menuitem"
+              formAction={() => deleteNote(noteId)}
             >
               <img
                 src="/cross.svg"
