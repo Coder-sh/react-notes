@@ -20,7 +20,6 @@ export async function saveNote(formData) {
   };
 
   const validated = schema.safeParse(data);
-  console.log(validated);
   if (!validated.success) {
     return {
       errors: validated.error.issues,
